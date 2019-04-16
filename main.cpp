@@ -60,10 +60,11 @@ int main() {
 		{
 			familyTree.addPersonEdge(intList[0], intList[1], 1);
 			familyTree.addPersonEdge(intList[0], intList[2], 2);
+			cout << "Individual " << intList[0] << " has parents " << intList[1] << " and is married in family " << intList[2] << endl;
 		}
 
 		if(holder[0] == 'F')
-                {
+        {
 			familyTree.addFamilyEdge(intList[0], intList[1], 3);
 			familyTree.addFamilyEdge(intList[0], intList[2], 4);
 			for(int o = 3; o < maxFamilySize; o++)
@@ -71,20 +72,28 @@ int main() {
 				if(intList[o] == -10){break;}
 				familyTree.addChildEdge(intList[0], intList[o], 5, (o - 3));
 				//cout << o << intList[o] << endl;
-                	}
+            }
+			cout << "Family " << intList[0] << " has husband " << intList[1] << ", wife " << intList[2] << " and children ";
+			for(int o = 3; o < maxFamilySize; o++)
+			{
+				if(intList[o] == -10){break;}
+				cout << intList[o] << " ";
+				//cout << o << intList[o] << endl;
+            }
+			cout << endl;
 		}
 		
 		if(holder[0] == 'C')
-                {
-			cout << "Check" << endl;
-                }
+        {
+			familyTree.checkConsistency();
+        }
 		
 		if(holder[0] == 'R')
-                {
-			cout << "Realte" << endl;
-                }
+        {
+			cout << "Relate" << endl;
+         }
 	}	
-	familyTree.printFamilyArray();
-	familyTree.printPersonArray();
+	//familyTree.printFamilyArray();
+	//familyTree.printPersonArray();
 	return 0;
 }

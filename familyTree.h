@@ -13,12 +13,12 @@
 
         private:
 		struct Individual {
-                        int parentFamily = 0;
-                        int marriageFamily = 0;
+                        int parentFamily = -10;
+                        int marriageFamily = -10;
                 };
                 struct Family {
-                        int husbandPerson = 0;
-                        int wifePerson = 0;
+                        int husbandPerson = -10;
+                        int wifePerson = -10;
 			int const static numChildrenMax = 10;
                         int childPerson[numChildrenMax];
                 };
