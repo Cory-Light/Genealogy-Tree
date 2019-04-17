@@ -15,12 +15,6 @@ int main() {
 	int intList[maxFamilySize];
 	int z;
 	FamilyTree familyTree;
-	
-	cout << "Parent = 1" << endl;
-	cout << "Marriage = 2" << endl;
-	cout << "Husband = 3" << endl;
-	cout << "Wife = 4" << endl;
-	cout << "Child = 5" << endl;
 
 	ifstream infile;
 	infile.open("test.txt");
