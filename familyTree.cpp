@@ -73,7 +73,7 @@ void FamilyTree::printPersonArray()
 }
 void FamilyTree::checkConsistency()
 {
-	for(int i = 1; i < maxFamilies; i++)
+	for(int i = 1; i < maxFamilies; i++) // Checking Family to Person relations
 	{
 		if(familyArr[i].husbandPerson != -10 && familyArr[i].wifePerson != -10)
 		{
@@ -92,48 +92,47 @@ void FamilyTree::checkConsistency()
 				// cout << "Family is: " << i << endl;
 				// cout << "Family's wife is: " << familyArr[i].wifePerson << endl;
 			}
-			for(int i = 0; i < numChildren; i++)
+			for(int z = 0; z < numChildren; z++)
 			{
-				if(familyArr[i].childPerson[i] != -10)
-					if(personArr[familyArr[i].childPerson[i]].parentFamily != i)
+				//cout << "in child loop " << z << endl;
+				if(familyArr[i].childPerson[z] != -10)
+				{
+					//cout << "kids are present" << "person: " << familyArr[i].childPerson[z] <<  endl;
+					if(personArr[familyArr[i].childPerson[z]].parentFamily != i)
 					{
-						cout << "Family " << i << " points to child individual " << familyArr[i].childPerson[i] << " but there is no backpointer." << endl;
+						cout << "Family " << i << " points to child individual " << familyArr[i].childPerson[z] << " but there is no backpointer." << endl;
 					}
+				}
 			}
 		}
 	}
 	
-	for(int i = 1; i < maxPeople; i++)
+	for(int i = 1; i < maxPeople; i++) // Checking Person to Family relations
 	{
-		if(personArr[i].parentFamily != -10 && personArr[i].marriageFamily != -10)
+		if(personArr[i].marriageFamily != -10)
 		{
-			if(personArr[i].marriageFamily != 0 && personArr[i].parentFamily != 0)
+			if(familyArr[personArr[i].marriageFamily].husbandPerson != i)
 			{
-				if (familyArr[personArr[i].marriageFamily].husbandPerson != i)
+				if(familyArr[personArr[i].marriageFamily].wifePerson != i)
 				{
 					cout << "Individual " << i << " points to marriage family " << personArr[i].marriageFamily << " but there is no backpointer." << endl;
-					cout << "Husband person is: " << familyArr[personArr[i].marriageFamily].husbandPerson << endl;
-					cout << "Person is: " << i << endl;
-					cout << "Persons marriage is family: " << personArr[i].marriageFamily << endl;
 				}
-				if (familyArr[personArr[i].marriageFamily].wifePerson != i)
-				{
-					cout << "Individual " << i << " points to marriage family " << personArr[i].marriageFamily << " but there is no backpointer." << endl;
-					cout << "Family wife is person: " << familyArr[personArr[i].marriageFamily].wifePerson << endl;
-					cout << "Person is: " << i << endl;
-					cout << "Persons marriage is family: " << personArr[i].marriageFamily << endl;
-				}
-				// for(int i = 0; i < numChildren; i++)
-				// {
-				// 	if(familyArr[i].childPerson[i] != -10)
-				// 		if(personArr[familyArr[i].childPerson[i]].parentFamily != i)
-				// 		{
-				// 			cout << "Family " << i << " points to child individual " << familyArr[i].childPerson[i] << " but there is no backpointer." << endl;
-				// 		}
-				// }
 			}
-			
 		}
-	}
-	
+		if(personArr[i].parentFamily != -10)
+		{
+			for(int z = 0; z < numChildren; z++)
+			{
+				if(familyArr[personArr[i].parentFamily].childPerson[z] == i)
+				{
+					break;
+				}
+				else if (familyArr[personArr[i].parentFamily].childPerson[z] == -10)
+				{
+					cout << "Individual " << i << " points to parent family " << personArr[i].parentFamily << " but there is no backpointer." << endl;
+					break;
+				}				
+			}
+		}
+	}	
 }
